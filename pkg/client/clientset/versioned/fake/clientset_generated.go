@@ -19,14 +19,14 @@ limitations under the License.
 package fake
 
 import (
+	clientset "github.com/cowbon/brokerchannel/pkg/client/clientset/versioned"
+	samplesv1alpha1 "github.com/cowbon/brokerchannel/pkg/client/clientset/versioned/typed/samples/v1alpha1"
+	fakesamplesv1alpha1 "github.com/cowbon/brokerchannel/pkg/client/clientset/versioned/typed/samples/v1alpha1/fake"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/watch"
 	"k8s.io/client-go/discovery"
 	fakediscovery "k8s.io/client-go/discovery/fake"
 	"k8s.io/client-go/testing"
-	clientset "knative.dev/sample-source/pkg/client/clientset/versioned"
-	samplesv1alpha1 "knative.dev/sample-source/pkg/client/clientset/versioned/typed/samples/v1alpha1"
-	fakesamplesv1alpha1 "knative.dev/sample-source/pkg/client/clientset/versioned/typed/samples/v1alpha1/fake"
 )
 
 // NewSimpleClientset returns a clientset that will respond with the provided objects.

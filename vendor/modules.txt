@@ -123,8 +123,8 @@ github.com/golang/protobuf/ptypes/duration
 github.com/golang/protobuf/ptypes/timestamp
 github.com/golang/protobuf/ptypes/wrappers
 # github.com/google/go-cmp v0.5.5
-## explicit
 github.com/google/go-cmp/cmp
+github.com/google/go-cmp/cmp/cmpopts
 github.com/google/go-cmp/cmp/internal/diff
 github.com/google/go-cmp/cmp/internal/flags
 github.com/google/go-cmp/cmp/internal/function
@@ -781,8 +781,12 @@ k8s.io/utils/trace
 ## explicit
 knative.dev/eventing/pkg/adapter/v2
 knative.dev/eventing/pkg/adapter/v2/util/crstatusevent
-knative.dev/eventing/pkg/apis/duck
+knative.dev/eventing/pkg/apis/config
 knative.dev/eventing/pkg/apis/duck/v1
+knative.dev/eventing/pkg/apis/eventing
+knative.dev/eventing/pkg/apis/messaging
+knative.dev/eventing/pkg/apis/messaging/config
+knative.dev/eventing/pkg/apis/messaging/v1
 knative.dev/eventing/pkg/apis/sources
 knative.dev/eventing/pkg/apis/sources/v1
 knative.dev/eventing/pkg/kncloudevents

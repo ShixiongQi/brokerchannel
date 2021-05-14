@@ -19,13 +19,13 @@ limitations under the License.
 package v1alpha1
 
 import (
-	internalinterfaces "knative.dev/sample-source/pkg/client/informers/externalversions/internalinterfaces"
+	internalinterfaces "github.com/cowbon/brokerchannel/pkg/client/informers/externalversions/internalinterfaces"
 )
 
 // Interface provides access to all the informers in this group version.
 type Interface interface {
-	// SampleSources returns a SampleSourceInformer.
-	SampleSources() SampleSourceInformer
+	// BrokerChannels returns a BrokerChannelInformer.
+	BrokerChannels() BrokerChannelInformer
 }
 
 type version struct {
@@ -39,7 +39,7 @@ func New(f internalinterfaces.SharedInformerFactory, namespace string, tweakList
 	return &version{factory: f, namespace: namespace, tweakListOptions: tweakListOptions}
 }
 
-// SampleSources returns a SampleSourceInformer.
-func (v *version) SampleSources() SampleSourceInformer {
-	return &sampleSourceInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
+// BrokerChannels returns a BrokerChannelInformer.
+func (v *version) BrokerChannels() BrokerChannelInformer {
+	return &brokerChannelInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
 }

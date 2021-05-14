@@ -19,14 +19,14 @@ limitations under the License.
 package v1alpha1
 
 import (
+	v1alpha1 "github.com/cowbon/brokerchannel/pkg/apis/samples/v1alpha1"
+	"github.com/cowbon/brokerchannel/pkg/client/clientset/versioned/scheme"
 	rest "k8s.io/client-go/rest"
-	v1alpha1 "knative.dev/sample-source/pkg/apis/samples/v1alpha1"
-	"knative.dev/sample-source/pkg/client/clientset/versioned/scheme"
 )
 
 type SamplesV1alpha1Interface interface {
 	RESTClient() rest.Interface
-	SampleSourcesGetter
+	BrokerChannelsGetter
 }
 
 // SamplesV1alpha1Client is used to interact with features provided by the samples.knative.dev group.
@@ -34,8 +34,8 @@ type SamplesV1alpha1Client struct {
 	restClient rest.Interface
 }
 
-func (c *SamplesV1alpha1Client) SampleSources(namespace string) SampleSourceInterface {
-	return newSampleSources(c, namespace)
+func (c *SamplesV1alpha1Client) BrokerChannels(namespace string) BrokerChannelInterface {
+	return newBrokerChannels(c, namespace)
 }
 
 // NewForConfig creates a new SamplesV1alpha1Client for the given config.

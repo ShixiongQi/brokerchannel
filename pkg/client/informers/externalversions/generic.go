@@ -21,9 +21,9 @@ package externalversions
 import (
 	"fmt"
 
+	v1alpha1 "github.com/cowbon/brokerchannel/pkg/apis/samples/v1alpha1"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	cache "k8s.io/client-go/tools/cache"
-	v1alpha1 "knative.dev/sample-source/pkg/apis/samples/v1alpha1"
 )
 
 // GenericInformer is type of SharedIndexInformer which will locate and delegate to other
@@ -53,8 +53,8 @@ func (f *genericInformer) Lister() cache.GenericLister {
 func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource) (GenericInformer, error) {
 	switch resource {
 	// Group=samples.knative.dev, Version=v1alpha1
-	case v1alpha1.SchemeGroupVersion.WithResource("samplesources"):
-		return &genericInformer{resource: resource.GroupResource(), informer: f.Samples().V1alpha1().SampleSources().Informer()}, nil
+	case v1alpha1.SchemeGroupVersion.WithResource("brokerchannels"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Samples().V1alpha1().BrokerChannels().Informer()}, nil
 
 	}
 

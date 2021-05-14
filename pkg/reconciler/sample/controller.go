@@ -18,25 +18,23 @@ package sample
 
 import (
 	"context"
+	brokerchannelreconciler "github.com/cowbon/brokerchannel/pkg/client/injection/reconciler/samples/v1alpha1/brokerchannel"
+	"knative.dev/eventing/pkg/duck"
 
-	reconcilersource "knative.dev/eventing/pkg/reconciler/source"
+	"github.com/cowbon/brokerchannel/pkg/apis/samples/v1alpha1"
 
-	"knative.dev/sample-source/pkg/apis/samples/v1alpha1"
-
-	"github.com/kelseyhightower/envconfig"
 	"k8s.io/client-go/tools/cache"
 
 	"knative.dev/pkg/configmap"
 	"knative.dev/pkg/controller"
 	"knative.dev/pkg/logging"
-	"knative.dev/pkg/resolver"
+	"knative.dev/eventing/pkg/client/injection/ducks/duck/v1/channelable"
+	"github.com/cowbon/brokerchannel/pkg/reconciler"
 
-	"knative.dev/sample-source/pkg/reconciler"
-
-	kubeclient "knative.dev/pkg/client/injection/kube/client"
-	deploymentinformer "knative.dev/pkg/client/injection/kube/informers/apps/v1/deployment"
-	samplesourceinformer "knative.dev/sample-source/pkg/client/injection/informers/samples/v1alpha1/samplesource"
-	"knative.dev/sample-source/pkg/client/injection/reconciler/samples/v1alpha1/samplesource"
+	brokerchannelinformer "github.com/cowbon/brokerchannel/pkg/client/injection/informers/samples/v1alpha1/brokerchannel"
+	"knative.dev/eventing/pkg/client/injection/informers/messaging/v1/subscription"
+	"knative.dev/pkg/injection/clients/dynamicclient"
+	eventingclient "knative.dev/eventing/pkg/client/injection/client"
 )
 
 // NewController initializes the controller and is called by the generated code
@@ -45,28 +43,23 @@ func NewController(
 	ctx context.Context,
 	cmw configmap.Watcher,
 ) *controller.Impl {
-	deploymentInformer := deploymentinformer.Get(ctx)
-	sampleSourceInformer := samplesourceinformer.Get(ctx)
+	subscriptionInformer := subscription.Get(ctx)
+	brokerChannelInformer := brokerchannelinformer.Get(ctx)
 
 	r := &Reconciler{
-		dr: &reconciler.DeploymentReconciler{KubeClientSet: kubeclient.Get(ctx)},
-		// Config accessor takes care of tracing/config/logging config propagation to the receive adapter
-		configAccessor: reconcilersource.WatchConfigurations(ctx, "sample-source", cmw),
+		brokerchannelLister: brokerChannelInformer.Lister(),
+		subscriptionLister: subscriptionInformer.Lister(),
+		dynamicClientSet:   dynamicclient.Get(ctx),
+		eventingClientSet:  eventingclient.Get(ctx),
 	}
-	if err := envconfig.Process("", r); err != nil {
-		logging.FromContext(ctx).Panicf("required environment variable is not defined: %v", err)
-	}
-
-	impl := samplesource.NewImpl(ctx, r)
-
-	r.sinkResolver = resolver.NewURIResolver(ctx, impl.EnqueueKey)
-
+	impl := brokerchannelreconciler.NewImpl(ctx, r)
 	logging.FromContext(ctx).Info("Setting up event handlers")
 
-	sampleSourceInformer.Informer().AddEventHandler(controller.HandleAll(impl.Enqueue))
+	r.channelableTracker = duck.NewListableTracker(ctx, channelable.Get, impl.EnqueueKey, controller.GetTrackerLease(ctx))
+	brokerChannelInformer.Informer().AddEventHandler(controller.HandleAll(impl.Enqueue))
 
-	deploymentInformer.Informer().AddEventHandler(cache.FilteringResourceEventHandler{
-		FilterFunc: controller.FilterControllerGK(v1alpha1.Kind("SampleSource")),
+	subscriptionInformer.Informer().AddEventHandler(cache.FilteringResourceEventHandler{
+		FilterFunc: controller.FilterControllerGK(v1alpha1.Kind("BrokerChannel")),
 		Handler:    controller.HandleAll(impl.EnqueueControllerOf),
 	})
 

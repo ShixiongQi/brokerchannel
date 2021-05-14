@@ -18,10 +18,10 @@ limitations under the License.
 
 package v1alpha1
 
-// SampleSourceListerExpansion allows custom methods to be added to
-// SampleSourceLister.
-type SampleSourceListerExpansion interface{}
+// BrokerChannelListerExpansion allows custom methods to be added to
+// BrokerChannelLister.
+type BrokerChannelListerExpansion interface{}
 
-// SampleSourceNamespaceListerExpansion allows custom methods to be added to
-// SampleSourceNamespaceLister.
-type SampleSourceNamespaceListerExpansion interface{}
+// BrokerChannelNamespaceListerExpansion allows custom methods to be added to
+// BrokerChannelNamespaceLister.
+type BrokerChannelNamespaceListerExpansion interface{}

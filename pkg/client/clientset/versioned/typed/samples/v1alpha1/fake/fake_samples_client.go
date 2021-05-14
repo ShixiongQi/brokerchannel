@@ -19,17 +19,17 @@ limitations under the License.
 package fake
 
 import (
+	v1alpha1 "github.com/cowbon/brokerchannel/pkg/client/clientset/versioned/typed/samples/v1alpha1"
 	rest "k8s.io/client-go/rest"
 	testing "k8s.io/client-go/testing"
-	v1alpha1 "knative.dev/sample-source/pkg/client/clientset/versioned/typed/samples/v1alpha1"
 )
 
 type FakeSamplesV1alpha1 struct {
 	*testing.Fake
 }
 
-func (c *FakeSamplesV1alpha1) SampleSources(namespace string) v1alpha1.SampleSourceInterface {
-	return &FakeSampleSources{c, namespace}
+func (c *FakeSamplesV1alpha1) BrokerChannels(namespace string) v1alpha1.BrokerChannelInterface {
+	return &FakeBrokerChannels{c, namespace}
 }
 
 // RESTClient returns a RESTClient that is used to communicate

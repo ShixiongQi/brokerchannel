@@ -1,10 +1,9 @@
-module knative.dev/sample-source
+module github.com/cowbon/brokerchannel
 
 go 1.14
 
 require (
 	github.com/cloudevents/sdk-go/v2 v2.4.1
-	github.com/google/go-cmp v0.5.5
 	github.com/kelseyhightower/envconfig v1.4.0
 	github.com/stretchr/testify v1.6.1
 	go.uber.org/zap v1.16.0
