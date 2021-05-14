@@ -68,7 +68,7 @@ var (
 type BrokerChannelSpec struct {
 	BrokerAddr string `json:"brokeraddr"`
 	// +optional
-	BrokerPort string `json:"brokerport"`
+	BrokerPort int `json:"brokerport"`
 	Topic string `json:"topic"`
 	// +optional
 	ChannelTemplate *messagingv1.ChannelTemplateSpec `json:"channelTemplate,omitempty"`

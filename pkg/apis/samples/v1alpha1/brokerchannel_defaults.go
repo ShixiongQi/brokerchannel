@@ -28,10 +28,6 @@ func (bc *BrokerChannel) SetDefaults(ctx context.Context) {
 	//Add code for Mutating admission webhook.
 
 	// call SetDefaults against duckv1.Destination with a context of ObjectMeta of SampleSource.
-	if bc.Spec.BrokerPort == "" {
-		bc.Spec.BrokerPort = "1883"
-	}
-
 	if bc.Spec.ChannelTemplate == nil {
 		cfg := config.FromContextOrDefaults(ctx)
 		c, err := cfg.ChannelDefaults.GetChannelConfig(apis.ParentMeta(ctx).Namespace)
