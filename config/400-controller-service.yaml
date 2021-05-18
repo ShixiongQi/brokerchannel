@@ -17,11 +17,11 @@ kind: Service
 metadata:
   labels:
     samples.knative.dev/release: devel
-    control-plane: sample-source-controller-manager
-  name: sample-source-controller-manager
+    control-plane: broker-channel-controller-manager
+  name: broker-channel-controller-manager
   namespace: knative-samples
 spec:
   selector:
-    control-plane: sample-source-controller-manager
+    control-plane: broker-channel-controller-manager
   ports:
   - port: 443

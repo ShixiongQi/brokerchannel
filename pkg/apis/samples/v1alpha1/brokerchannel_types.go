@@ -52,6 +52,7 @@ func (*BrokerChannel) GetGroupVersionKind() schema.GroupVersionKind {
 var (
 	// Check that SampleSource can be validated and defaulted.
 	_ apis.Defaultable = (*BrokerChannel)(nil)
+	_ apis.Validatable = (*BrokerChannel)(nil)
 	// Check that we can create OwnerReferences to a SampleSource.
 	_ kmeta.OwnerRefable = (*BrokerChannel)(nil)
 	// Check that SampleSource is a runtime.Object.

@@ -15,7 +15,7 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: sample-source-webhook
+  name: broker-channel-webhook
   labels:
     samples.knative.dev/release: devel
 rules:
@@ -23,7 +23,7 @@ rules:
   - apiGroups:
       - samples.knative.dev
     resources:
-      - samplesources
+      - brokerchannel
     verbs: &everything
       - get
       - list
@@ -44,7 +44,7 @@ rules:
   - apiGroups:
       - samples.knative.dev
     resources:
-      - samplesources/status
+      - brokerchannels/status
     verbs:
       - get
       - update

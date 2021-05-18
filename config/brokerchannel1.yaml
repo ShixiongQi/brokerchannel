@@ -1,0 +1,85 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  # name must match the spec fields below, and be in the form: <plural>.<group>
+  name: brokerchannels.samples.knative.dev
+  labels:
+    samples.knative.dev/release: devel
+    knative.dev/crd-install: "true"
+spec:
+  group: samples.knative.dev
+  versions:
+  - name: v1alpha1
+    served: true
+    storage: true
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          spec:
+            type: object
+            required:
+            -  brokeraddr
+            -  topic
+            properties:
+              brokeraddr:
+                description: 'The address of the broker to connect'
+                type: string
+              brokerport:
+                description: 'The port number of the broker to connect'
+                type: integer
+              topic:
+                type: string
+                description: 'Name of the MQTT topic'
+              subscribers:
+                type: array
+                description: 'A list of subscribers'
+                items:
+                  type: object
+                  properties:
+                    ref:
+                      apiVersion:
+                        description: API version of the referent.
+                        type: string
+                      kind:
+                        description: 'Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+                        type: string
+                      name:
+                        description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names'
+                        type: string
+                      namespace:
+                        description: 'Namespace of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/ This is optional field, it gets defaulted to the object holding it if left out.'
+                        type: string
+                    uri:
+                      description: URI to use as the destination of events.
+                      type: string
+                      format: uri
+                  oneOf:
+                  - required: [ref]
+                  - required: [uri]
+          status:
+            description: Status represents the current state of the BrokerChannel. This data may be out of date.
+            type: object
+            properties:
+              lastTransitionTime:
+                # we use a string in the stored object but a wrapper object
+                # at runtime.
+                type: string
+              message:
+                type: string
+              reason:
+                type: string
+              severity:
+                type: string
+              status:
+                type: string
+              type:
+                type: string
+
+  scope: Namespaced
+  names:
+    plural: brokerchannels
+    # singular name to be used as an alias on the CLI and for display
+    singular: brokerchannel
+    # kind is normally the CamelCased singular type. Your resource manifests use this.
+    kind: BrokerChannel

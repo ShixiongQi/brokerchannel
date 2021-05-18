@@ -1,0 +1,16 @@
+apiVersion: samples.knative.dev/v1alpha1
+kind: BrokerChannel
+metadata:
+  name: test
+  namespace: default
+spec:
+  channelTemplate:
+    apiVersion: messaging.knative.dev/v1
+    kind: InMemoryChannel
+  brokeraddr: 10.244.1.220 
+  brokerport: 1883
+  topic: motion
+  subscribers:
+    - apiVersion: messaging.knative.dev/v1
+      kind: Service
+      name: camel-event-display
