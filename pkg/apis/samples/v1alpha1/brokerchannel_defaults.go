@@ -18,9 +18,6 @@ package v1alpha1
 
 import (
 	"context"
-	"knative.dev/pkg/apis"
-	"knative.dev/eventing/pkg/apis/messaging/config"
-	messagingv1 "knative.dev/eventing/pkg/apis/messaging/v1"
 )
 
 // SetDefaults mutates SampleSource.
@@ -28,23 +25,8 @@ func (bc *BrokerChannel) SetDefaults(ctx context.Context) {
 	//Add code for Mutating admission webhook.
 
 	// call SetDefaults against duckv1.Destination with a context of ObjectMeta of SampleSource.
-	if bc.Spec.ChannelTemplate == nil {
-		cfg := config.FromContextOrDefaults(ctx)
-		c, err := cfg.ChannelDefaults.GetChannelConfig(apis.ParentMeta(ctx).Namespace)
-
-		if err == nil {
-			bc.Spec.ChannelTemplate = &messagingv1.ChannelTemplateSpec{
-				TypeMeta: c.TypeMeta,
-				Spec:     c.Spec,
-			}
-		}
-	}
-	withNS := apis.WithinParent(ctx, bc.ObjectMeta)
-	bc.Spec.SetDefaults(withNS)
+	bc.Spec.SetDefaults(ctx)
 }
 
 func (bcs *BrokerChannelSpec) SetDefaults(ctx context.Context) {
-	for _, sub := range bcs.Subscribers {
-		sub.SetDefaults(ctx)
-	}
 }

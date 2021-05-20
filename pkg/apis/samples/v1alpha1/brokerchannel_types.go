@@ -24,8 +24,7 @@ import (
 	"knative.dev/pkg/apis/duck"
 	duckv1 "knative.dev/pkg/apis/duck/v1"
 	"knative.dev/pkg/kmeta"
-	messagingv1 "knative.dev/eventing/pkg/apis/messaging/v1"
-	corev1 "k8s.io/api/core/v1"
+	"knative.dev/pkg/webhook/resourcesemantics"
 )
 
 // +genclient
@@ -46,7 +45,7 @@ type BrokerChannel struct {
 
 // GetGroupVersionKind returns the GroupVersionKind.
 func (*BrokerChannel) GetGroupVersionKind() schema.GroupVersionKind {
-	return SchemeGroupVersion.WithKind("SampleSource")
+	return SchemeGroupVersion.WithKind("BrokerChannel")
 }
 
 var (
@@ -58,7 +57,7 @@ var (
 	// Check that SampleSource is a runtime.Object.
 	_ runtime.Object = (*BrokerChannel)(nil)
 	// Check that SampleSource satisfies resourcesemantics.GenericCRD.
-	//_ resourcesemantics.GenericCRD = (*BrokerChannel)(nil)
+	_ resourcesemantics.GenericCRD = (*BrokerChannel)(nil)
 	// Check that SampleSource implements the Conditions duck type.
 	_ = duck.VerifyType(&BrokerChannel{}, &duckv1.Conditions{})
 	// Check that the type conforms to the duck Knative Resource shape.
@@ -72,31 +71,9 @@ type BrokerChannelSpec struct {
 	BrokerPort int `json:"brokerport"`
 	Topic string `json:"topic"`
 	// +optional
-	ChannelTemplate *messagingv1.ChannelTemplateSpec `json:"channelTemplate,omitempty"`
-	Subscribers []duckv1.Destination `json:"subscribers"`
+	duckv1.SourceSpec `json:",inline"`
 }
 
-const (
-	// SampleSourceConditionReady is set when the revision is starting to materialize
-	// runtime resources, and becomes true when those resources are ready.
-	BrokerChannelConditionReady = apis.ConditionReady
-)
-
-type BrokerChannelChannelStatus struct {
-	// Channel is the reference to the underlying channel.
-	Channel corev1.ObjectReference `json:"channel"`
-
-	// ReadyCondition indicates whether the Channel is ready or not.
-	ReadyCondition apis.Condition `json:"ready"`
-}
-
-type BrokerChannelSubscriptionStatus struct {
-	// Subscription is the reference to the underlying Subscription.
-	Subscription corev1.ObjectReference `json:"subscription"`
-
-	// ReadyCondition indicates whether the Subscription is ready or not.
-	ReadyCondition apis.Condition `json:"ready"`
-}
 
 // SampleSourceStatus communicates the observed state of the SampleSource (from the controller).
 type BrokerChannelStatus struct {
@@ -107,14 +84,7 @@ type BrokerChannelStatus struct {
 	//   state.
 	// * SinkURI - the current active sink URI that has been configured for the
 	//   Source.
-	duckv1.Status `json:",inline"`
-	SubscriptionStatuses []BrokerChannelSubscriptionStatus `json:"subscriptionStatuses"`
-
-	// ChannelStatuses is an array of corresponding Channel statuses.
-	// Matches the Spec.Steps array in the order.
-	ChannelStatuses BrokerChannelChannelStatus `json:"channelStatuses"`
-	// +optional
-	Address duckv1.Addressable `json:"address,omitempty"`
+	duckv1.SourceStatus `json:",inline"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

@@ -284,6 +284,9 @@ func (r *reconcilerImpl) Reconcile(ctx context.Context, key string) error {
 		// the elected leader is expected to write modifications.
 		logger.Warn("Saw status changes when we aren't the leader!")
 	default:
+		if reconcileEvent != nil {
+			logger.Debug(reconcileEvent)
+		}
 		if err = r.updateStatus(ctx, original, resource); err != nil {
 			logger.Warnw("Failed to update resource status", zap.Error(err))
 			r.Recorder.Eventf(resource, v1.EventTypeWarning, "UpdateFailed",
@@ -306,8 +309,6 @@ func (r *reconcilerImpl) Reconcile(ctx context.Context, key string) error {
 			return nil
 		}
 
-		logger.Errorw("Returned an error", zap.Error(reconcileEvent))
-		r.Recorder.Event(resource, v1.EventTypeWarning, "InternalError", reconcileEvent.Error())
 		return reconcileEvent
 	}
 
@@ -340,8 +341,10 @@ func (r *reconcilerImpl) updateStatus(ctx context.Context, existing *v1alpha1.Br
 		existing.Status = desired.Status
 
 		updater := r.Client.SamplesV1alpha1().BrokerChannels(existing.Namespace)
-
 		_, err = updater.UpdateStatus(ctx, existing, metav1.UpdateOptions{})
+		if err != nil {
+			logging.FromContext(ctx).Debug(err)
+		}
 		return err
 	})
 }

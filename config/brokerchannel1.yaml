@@ -6,12 +6,28 @@ metadata:
   labels:
     samples.knative.dev/release: devel
     knative.dev/crd-install: "true"
+    eventing.knative.dev/source: "true"
 spec:
   group: samples.knative.dev
   versions:
   - name: v1alpha1
     served: true
     storage: true
+    subresources:
+      status: {}
+    additionalPrinterColumns:
+    - name: Ready
+      type: string
+      jsonPath: ".status.conditions[?(@.type=='Ready')].status"
+    - name: Reason
+      type: string
+      jsonPath: ".status.conditions[?(@.type=='Ready')].reason"
+    - name: Sink
+      type: string
+      jsonPath: .status.sinkUri
+    - name: Age
+      type: date
+      jsonPath: .metadata.creationTimestamp
     schema:
       openAPIV3Schema:
         type: object
@@ -31,13 +47,15 @@ spec:
               topic:
                 type: string
                 description: 'Name of the MQTT topic'
-              subscribers:
-                type: array
+              sink:
                 description: 'A list of subscribers'
-                items:
-                  type: object
-                  properties:
-                    ref:
+                type: object
+                properties:
+                  ref:
+                    description: Reference to an addressable Kubernetes object
+                      to be used as the destination of events.
+                    type: object
+                    properties:
                       apiVersion:
                         description: API version of the referent.
                         type: string
@@ -50,13 +68,17 @@ spec:
                       namespace:
                         description: 'Namespace of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/ This is optional field, it gets defaulted to the object holding it if left out.'
                         type: string
-                    uri:
-                      description: URI to use as the destination of events.
-                      type: string
-                      format: uri
-                  oneOf:
-                  - required: [ref]
-                  - required: [uri]
+                    required:
+                    - apiVersion
+                    - kind
+                    - name
+                  uri:
+                    description: URI to use as the destination of events.
+                    type: string
+                    format: uri
+                oneOf:
+                - required: [ref]
+                - required: [uri]
           status:
             description: Status represents the current state of the BrokerChannel. This data may be out of date.
             type: object
@@ -74,6 +96,8 @@ spec:
               status:
                 type: string
               type:
+                type: string
+              sinkUri:
                 type: string
 
   scope: Namespaced

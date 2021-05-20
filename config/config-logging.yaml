@@ -21,7 +21,7 @@ data:
   # Common configuration for all Knative codebase
   zap-logger-config: |
     {
-      "level": "info",
+      "level": "debug",
       "development": false,
       "outputPaths": ["stdout"],
       "errorOutputPaths": ["stderr"],
@@ -43,5 +43,5 @@ data:
 
   # Log level overrides
   # For all components changes are be picked up immediately.
-  loglevel.controller: "info"
+  loglevel.controller: "debug"
   loglevel.webhook: "info"

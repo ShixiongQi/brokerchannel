@@ -35,6 +35,7 @@ type MQTTConnection struct {
 }
 
 func newMQTTConnection(addr *apis.URL, topic, broker string, port int, logger *zap.SugaredLogger, stopCh <-chan struct{}) (*MQTTConnection, error) {
+	logger.Infof("Url is %v\n", addr)
 	server := fmt.Sprintf("%s:%d", broker, port)
 	logger.Infof("Create connection to %s", server)
 	conn, err := net.Dial("tcp", server)
@@ -113,7 +114,7 @@ func (cm *ConnectionManager) AddConn(obj interface{}) {
 	ID := types.NamespacedName{Namespace: bc.Namespace, Name: bc.Name}
 	_, ok := cm.conn[ID]
 	if !ok {
-		newConn, err := newMQTTConnection(bc.Status.Address.URL, bc.Spec.Topic, bc.Spec.BrokerAddr, bc.Spec.BrokerPort, cm.logger, cm.sigCh)
+		newConn, err := newMQTTConnection(bc.Status.SinkURI, bc.Spec.Topic, bc.Spec.BrokerAddr, bc.Spec.BrokerPort, cm.logger, cm.sigCh)
 		if err != nil {
 			panic(err)
 		}
