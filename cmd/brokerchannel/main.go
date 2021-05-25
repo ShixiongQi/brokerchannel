@@ -35,7 +35,6 @@ type MQTTConnection struct {
 }
 
 func newMQTTConnection(addr *apis.URL, topic, broker string, port int, logger *zap.SugaredLogger, stopCh <-chan struct{}) (*MQTTConnection, error) {
-	logger.Infof("Url is %v\n", addr)
 	server := fmt.Sprintf("%s:%d", broker, port)
 	logger.Infof("Create connection to %s", server)
 	conn, err := net.Dial("tcp", server)
@@ -57,17 +56,18 @@ func newMQTTConnection(addr *apis.URL, topic, broker string, port int, logger *z
 		stopCh:		stopCh,
 	}
 	mc.client.Conn = conn
+	logger.Infof("Url is %v", addr)
 	mc.client.Router = paho.NewSingleHandlerRouter(func(m *paho.Publish) {
-			logger.Infof("Receive object %v\n", m)
+			//mc.logger.Infof("Receive object %v\n", m)
 			event := cloudevents.NewEvent()
 			prop := m.Properties.User
 			event.SetSource(prop["source"])
 			event.SetType(prop["type"])
 			event.SetID(prop["ID"])
 			event.SetData(cloudevents.ApplicationJSON, m.Payload)
-			ctx := cloudevents.ContextWithTarget(context.Background(), addr.URL().String())
+			ctx := cloudevents.ContextWithTarget(context.Background(), mc.addr.URL().String())
 			if result := c.Send(ctx, event); cloudevents.IsUndelivered(result) {
-				logger.Fatalf("failed to send, %v", result)
+				mc.logger.Fatalf("failed to send, %v", result)
 			}
 		})
 	ca, err := mc.client.Connect(context.Background(), &paho.Connect{CleanStart: true, KeepAlive:  30,})
@@ -120,6 +120,7 @@ func (cm *ConnectionManager) AddConn(obj interface{}) {
 		}
 		cm.conn[ID] = newConn
 	}
+	cm.conn[ID].addr = bc.Status.SinkURI
 	if err := cm.conn[ID].Subscribe(cm.ctx, bc.Spec.Topic); err != nil {
 		panic(err)
 	}

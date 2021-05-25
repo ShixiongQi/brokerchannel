@@ -4,7 +4,7 @@ metadata:
   name: test
   namespace: default
 spec:
-  brokeraddr: 10.244.1.220 
+  brokeraddr: 10.102.160.188 
   brokerport: 1883
   topic: motion
   sink:
