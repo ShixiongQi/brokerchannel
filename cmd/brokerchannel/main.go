@@ -64,6 +64,7 @@ func newMQTTConnection(addr *apis.URL, topic, broker string, port int, logger *z
 			event.SetSource(prop["source"])
 			event.SetType(prop["type"])
 			event.SetID(prop["ID"])
+			logger.Infof("QLOG: source: %v, type: %v, ID: %v", prop["source"], prop["type"], prop["ID"])
 			event.SetData(cloudevents.ApplicationJSON, m.Payload)
 			ctx := cloudevents.ContextWithTarget(context.Background(), mc.addr.URL().String())
 			if result := c.Send(ctx, event); cloudevents.IsUndelivered(result) {
