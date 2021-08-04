@@ -19,8 +19,8 @@ import (
 	"knative.dev/pkg/metrics"
 	"knative.dev/pkg/injection"
 
-	v1alpha1 "github.com/cowbon/brokerchannel/pkg/apis/samples/v1alpha1"
-	brokerchannelinformer "github.com/cowbon/brokerchannel/pkg/client/injection/informers/samples/v1alpha1/brokerchannel"
+	v1alpha1 "github.com/ShixiongQi/brokerchannel/pkg/apis/samples/v1alpha1"
+	brokerchannelinformer "github.com/ShixiongQi/brokerchannel/pkg/client/injection/informers/samples/v1alpha1/brokerchannel"
 	"knative.dev/pkg/apis"
 	cloudevents "github.com/cloudevents/sdk-go/v2"
 )

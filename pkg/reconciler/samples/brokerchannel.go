@@ -3,7 +3,7 @@ package samples
 import (
 	"context"
 
-	v1alpha1 "github.com/cowbon/brokerchannel/pkg/apis/samples/v1alpha1"
+	v1alpha1 "github.com/ShixiongQi/brokerchannel/pkg/apis/samples/v1alpha1"
 	"k8s.io/client-go/dynamic"
 	sourcesv1 "knative.dev/eventing/pkg/apis/sources/v1"
 	pkgreconciler "knative.dev/pkg/reconciler"

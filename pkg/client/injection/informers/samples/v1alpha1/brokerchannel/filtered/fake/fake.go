@@ -21,8 +21,8 @@ package fake
 import (
 	context "context"
 
-	factoryfiltered "github.com/cowbon/brokerchannel/pkg/client/injection/informers/factory/filtered"
-	filtered "github.com/cowbon/brokerchannel/pkg/client/injection/informers/samples/v1alpha1/brokerchannel/filtered"
+	factoryfiltered "github.com/ShixiongQi/brokerchannel/pkg/client/injection/informers/factory/filtered"
+	filtered "github.com/ShixiongQi/brokerchannel/pkg/client/injection/informers/samples/v1alpha1/brokerchannel/filtered"
 	controller "knative.dev/pkg/controller"
 	injection "knative.dev/pkg/injection"
 	logging "knative.dev/pkg/logging"

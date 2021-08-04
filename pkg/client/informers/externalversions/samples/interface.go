@@ -19,8 +19,8 @@ limitations under the License.
 package samples
 
 import (
-	internalinterfaces "github.com/cowbon/brokerchannel/pkg/client/informers/externalversions/internalinterfaces"
-	v1alpha1 "github.com/cowbon/brokerchannel/pkg/client/informers/externalversions/samples/v1alpha1"
+	internalinterfaces "github.com/ShixiongQi/brokerchannel/pkg/client/informers/externalversions/internalinterfaces"
+	v1alpha1 "github.com/ShixiongQi/brokerchannel/pkg/client/informers/externalversions/samples/v1alpha1"
 )
 
 // Interface provides access to each of this group's versions.

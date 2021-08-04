@@ -18,7 +18,7 @@ package main
 
 import (
 	// The set of controllers this controller process runs.
-	"github.com/cowbon/brokerchannel/pkg/reconciler/samples"
+	"github.com/ShixiongQi/brokerchannel/pkg/reconciler/samples"
 
 	// This defines the shared main for injected controllers.
 	"knative.dev/pkg/injection/sharedmain"

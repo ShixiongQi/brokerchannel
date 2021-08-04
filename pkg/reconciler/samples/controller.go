@@ -18,13 +18,13 @@ package samples
 
 import (
 	"context"
-	brokerchannelreconciler "github.com/cowbon/brokerchannel/pkg/client/injection/reconciler/samples/v1alpha1/brokerchannel"
+	brokerchannelreconciler "github.com/ShixiongQi/brokerchannel/pkg/client/injection/reconciler/samples/v1alpha1/brokerchannel"
 
 	"knative.dev/pkg/configmap"
 	"knative.dev/pkg/controller"
 	"knative.dev/pkg/logging"
 
-	brokerchannelinformer "github.com/cowbon/brokerchannel/pkg/client/injection/informers/samples/v1alpha1/brokerchannel"
+	brokerchannelinformer "github.com/ShixiongQi/brokerchannel/pkg/client/injection/informers/samples/v1alpha1/brokerchannel"
 	"knative.dev/pkg/injection/clients/dynamicclient"
 	"knative.dev/pkg/resolver"
 )

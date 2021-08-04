@@ -21,9 +21,9 @@ package fakeFilteredFactory
 import (
 	context "context"
 
-	externalversions "github.com/cowbon/brokerchannel/pkg/client/informers/externalversions"
-	fake "github.com/cowbon/brokerchannel/pkg/client/injection/client/fake"
-	filtered "github.com/cowbon/brokerchannel/pkg/client/injection/informers/factory/filtered"
+	externalversions "github.com/ShixiongQi/brokerchannel/pkg/client/informers/externalversions"
+	fake "github.com/ShixiongQi/brokerchannel/pkg/client/injection/client/fake"
+	filtered "github.com/ShixiongQi/brokerchannel/pkg/client/injection/informers/factory/filtered"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	controller "knative.dev/pkg/controller"
 	injection "knative.dev/pkg/injection"

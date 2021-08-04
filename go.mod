@@ -1,4 +1,4 @@
-module github.com/cowbon/brokerchannel
+module github.com/ShixiongQi/brokerchannel
 
 go 1.14
 

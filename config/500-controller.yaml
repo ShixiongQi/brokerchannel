@@ -65,7 +65,7 @@ spec:
           - name: METRICS_DOMAIN
             value: knative.dev/sources
               #- name: SAMPLE_SOURCE_RA_IMAGE
-              #value: ko://github.com/cowbon/brokerchannel/cmd/brokerchannel
+              #value: ko://github.com/ShixiongQi/brokerchannel/cmd/brokerchannel
           - name: POD_NAME
             valueFrom:
               fieldRef:

@@ -19,8 +19,8 @@ limitations under the License.
 package v1alpha1
 
 import (
-	v1alpha1 "github.com/cowbon/brokerchannel/pkg/apis/samples/v1alpha1"
-	"github.com/cowbon/brokerchannel/pkg/client/clientset/versioned/scheme"
+	v1alpha1 "github.com/ShixiongQi/brokerchannel/pkg/apis/samples/v1alpha1"
+	"github.com/ShixiongQi/brokerchannel/pkg/client/clientset/versioned/scheme"
 	rest "k8s.io/client-go/rest"
 )
 

@@ -17,7 +17,7 @@ limitations under the License.
 package v1alpha1
 
 import (
-	"github.com/cowbon/brokerchannel/pkg/apis/samples"
+	"github.com/ShixiongQi/brokerchannel/pkg/apis/samples"
 
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"

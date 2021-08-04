@@ -23,9 +23,9 @@ import (
 	sync "sync"
 	time "time"
 
-	versioned "github.com/cowbon/brokerchannel/pkg/client/clientset/versioned"
-	internalinterfaces "github.com/cowbon/brokerchannel/pkg/client/informers/externalversions/internalinterfaces"
-	samples "github.com/cowbon/brokerchannel/pkg/client/informers/externalversions/samples"
+	versioned "github.com/ShixiongQi/brokerchannel/pkg/client/clientset/versioned"
+	internalinterfaces "github.com/ShixiongQi/brokerchannel/pkg/client/informers/externalversions/internalinterfaces"
+	samples "github.com/ShixiongQi/brokerchannel/pkg/client/informers/externalversions/samples"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"

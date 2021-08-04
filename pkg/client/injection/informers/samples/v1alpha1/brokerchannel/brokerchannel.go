@@ -21,8 +21,8 @@ package brokerchannel
 import (
 	context "context"
 
-	v1alpha1 "github.com/cowbon/brokerchannel/pkg/client/informers/externalversions/samples/v1alpha1"
-	factory "github.com/cowbon/brokerchannel/pkg/client/injection/informers/factory"
+	v1alpha1 "github.com/ShixiongQi/brokerchannel/pkg/client/informers/externalversions/samples/v1alpha1"
+	factory "github.com/ShixiongQi/brokerchannel/pkg/client/injection/informers/factory"
 	controller "knative.dev/pkg/controller"
 	injection "knative.dev/pkg/injection"
 	logging "knative.dev/pkg/logging"
@@ -46,7 +46,7 @@ func Get(ctx context.Context) v1alpha1.BrokerChannelInformer {
 	untyped := ctx.Value(Key{})
 	if untyped == nil {
 		logging.FromContext(ctx).Panic(
-			"Unable to fetch github.com/cowbon/brokerchannel/pkg/client/informers/externalversions/samples/v1alpha1.BrokerChannelInformer from context.")
+			"Unable to fetch github.com/ShixiongQi/brokerchannel/pkg/client/informers/externalversions/samples/v1alpha1.BrokerChannelInformer from context.")
 	}
 	return untyped.(v1alpha1.BrokerChannelInformer)
 }

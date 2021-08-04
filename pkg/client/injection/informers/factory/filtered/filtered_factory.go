@@ -21,8 +21,8 @@ package filteredFactory
 import (
 	context "context"
 
-	externalversions "github.com/cowbon/brokerchannel/pkg/client/informers/externalversions"
-	client "github.com/cowbon/brokerchannel/pkg/client/injection/client"
+	externalversions "github.com/ShixiongQi/brokerchannel/pkg/client/informers/externalversions"
+	client "github.com/ShixiongQi/brokerchannel/pkg/client/injection/client"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	controller "knative.dev/pkg/controller"
 	injection "knative.dev/pkg/injection"
@@ -71,7 +71,7 @@ func Get(ctx context.Context, selector string) externalversions.SharedInformerFa
 	untyped := ctx.Value(Key{Selector: selector})
 	if untyped == nil {
 		logging.FromContext(ctx).Panicf(
-			"Unable to fetch github.com/cowbon/brokerchannel/pkg/client/informers/externalversions.SharedInformerFactory with selector %s from context.", selector)
+			"Unable to fetch github.com/ShixiongQi/brokerchannel/pkg/client/informers/externalversions.SharedInformerFactory with selector %s from context.", selector)
 	}
 	return untyped.(externalversions.SharedInformerFactory)
 }

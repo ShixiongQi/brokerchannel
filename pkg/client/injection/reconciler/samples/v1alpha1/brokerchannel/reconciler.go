@@ -24,9 +24,9 @@ import (
 	fmt "fmt"
 	reflect "reflect"
 
-	v1alpha1 "github.com/cowbon/brokerchannel/pkg/apis/samples/v1alpha1"
-	versioned "github.com/cowbon/brokerchannel/pkg/client/clientset/versioned"
-	samplesv1alpha1 "github.com/cowbon/brokerchannel/pkg/client/listers/samples/v1alpha1"
+	v1alpha1 "github.com/ShixiongQi/brokerchannel/pkg/apis/samples/v1alpha1"
+	versioned "github.com/ShixiongQi/brokerchannel/pkg/client/clientset/versioned"
+	samplesv1alpha1 "github.com/ShixiongQi/brokerchannel/pkg/client/listers/samples/v1alpha1"
 	zap "go.uber.org/zap"
 	v1 "k8s.io/api/core/v1"
 	equality "k8s.io/apimachinery/pkg/api/equality"

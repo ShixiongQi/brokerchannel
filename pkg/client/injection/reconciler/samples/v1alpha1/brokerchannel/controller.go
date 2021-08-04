@@ -24,9 +24,9 @@ import (
 	reflect "reflect"
 	strings "strings"
 
-	versionedscheme "github.com/cowbon/brokerchannel/pkg/client/clientset/versioned/scheme"
-	client "github.com/cowbon/brokerchannel/pkg/client/injection/client"
-	brokerchannel "github.com/cowbon/brokerchannel/pkg/client/injection/informers/samples/v1alpha1/brokerchannel"
+	versionedscheme "github.com/ShixiongQi/brokerchannel/pkg/client/clientset/versioned/scheme"
+	client "github.com/ShixiongQi/brokerchannel/pkg/client/injection/client"
+	brokerchannel "github.com/ShixiongQi/brokerchannel/pkg/client/injection/informers/samples/v1alpha1/brokerchannel"
 	zap "go.uber.org/zap"
 	corev1 "k8s.io/api/core/v1"
 	labels "k8s.io/apimachinery/pkg/labels"

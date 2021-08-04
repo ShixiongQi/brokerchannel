@@ -21,8 +21,8 @@ package fake
 import (
 	context "context"
 
-	fake "github.com/cowbon/brokerchannel/pkg/client/injection/informers/factory/fake"
-	brokerchannel "github.com/cowbon/brokerchannel/pkg/client/injection/informers/samples/v1alpha1/brokerchannel"
+	fake "github.com/ShixiongQi/brokerchannel/pkg/client/injection/informers/factory/fake"
+	brokerchannel "github.com/ShixiongQi/brokerchannel/pkg/client/injection/informers/samples/v1alpha1/brokerchannel"
 	controller "knative.dev/pkg/controller"
 	injection "knative.dev/pkg/injection"
 )

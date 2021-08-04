@@ -21,7 +21,7 @@ package versioned
 import (
 	"fmt"
 
-	samplesv1alpha1 "github.com/cowbon/brokerchannel/pkg/client/clientset/versioned/typed/samples/v1alpha1"
+	samplesv1alpha1 "github.com/ShixiongQi/brokerchannel/pkg/client/clientset/versioned/typed/samples/v1alpha1"
 	discovery "k8s.io/client-go/discovery"
 	rest "k8s.io/client-go/rest"
 	flowcontrol "k8s.io/client-go/util/flowcontrol"
