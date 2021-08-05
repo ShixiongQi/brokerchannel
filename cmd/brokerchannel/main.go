@@ -58,13 +58,13 @@ func newMQTTConnection(addr *apis.URL, topic, broker string, port int, logger *z
 	mc.client.Conn = conn
 	logger.Infof("Url is %v", addr)
 	mc.client.Router = paho.NewSingleHandlerRouter(func(m *paho.Publish) {
-			//mc.logger.Infof("Receive object %v\n", m)
+			// logger.Infof("Receive object %v\n", m)
 			event := cloudevents.NewEvent()
 			prop := m.Properties.User
 			event.SetSource(prop["source"])
 			event.SetType(prop["type"])
 			event.SetID(prop["ID"])
-			logger.Infof("QLOG: source: %v, type: %v, ID: %v", prop["source"], prop["type"], prop["ID"])
+			// logger.Infof("QLOG: source: %v, type: %v, ID: %v", prop["source"], prop["type"], prop["ID"])
 			event.SetData(cloudevents.ApplicationJSON, m.Payload)
 			ctx := cloudevents.ContextWithTarget(context.Background(), mc.addr.URL().String())
 			if result := c.Send(ctx, event); cloudevents.IsUndelivered(result) {
