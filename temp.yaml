@@ -4,26 +4,11 @@ metadata:
   name: test-motion
   namespace: default
 spec:
-  brokeraddr: 10.244.1.27 
+  brokeraddr: 10.244.1.61 # Set the IP address of the mosquitto Pod
   brokerport: 1883
   topic: motion
   sink:
-    ref:
-      apiVersion: messaging.knative.dev/v1 #messaging.knative.dev/v1
-      kind: InMemoryChannel
-      name: camel-test
----
-apiVersion: samples.knative.dev/v1alpha1
-kind: BrokerChannel
-metadata:
-  name: test-temp
-  namespace: default
-spec:
-  brokeraddr: 10.244.1.27 
-  brokerport: 1883
-  topic: motion
-  sink:
-    ref:
-      apiVersion: messaging.knative.dev/v1 #messaging.knative.dev/v1
-      kind: InMemoryChannel
-      name: camel-test
+    ref: # Change the apiVersion and kind accordingly
+      apiVersion: v1
+      kind: Service
+      name: helloworld-go
