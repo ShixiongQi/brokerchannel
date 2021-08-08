@@ -24,7 +24,8 @@ spec:
       - name: brokerchannel
         # This is the Go import path for the binary that is containerized
         # and substituted here.
-        image: ko://github.com/ShixiongQi/brokerchannel/cmd/brokerchannel
+        # image: ko://github.com/ShixiongQi/brokerchannel/cmd/brokerchannel
+        image: shixiongqi/brokerchannel-51badd1721bd0ef5bf09d4c6adb0dd83:latest
 
         # The numbers are based on performance test results from
         # https://github.com/knative/serving/issues/1625#issuecomment-511930023

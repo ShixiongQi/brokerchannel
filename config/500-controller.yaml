@@ -46,7 +46,8 @@ spec:
       containers:
       - name: controller
         terminationMessagePolicy: FallbackToLogsOnError
-        image: ko://github.com/ShixiongQi/brokerchannel/cmd/controller
+        # image: ko://github.com/ShixiongQi/brokerchannel/cmd/controller
+        image: shixiongqi/controller-5f48a662f3a893bc7b0513a9e3a37ec5:latest
 
         resources:
           requests:
