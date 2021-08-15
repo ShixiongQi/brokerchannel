@@ -31,11 +31,11 @@ spec:
         # https://github.com/knative/serving/issues/1625#issuecomment-511930023
         resources:
           requests:
-            cpu: 300m
-            memory: 60Mi
+            cpu: 1000m
+            # memory: 60Mi
           limits:
             cpu: 1000m
-            memory: 600Mi
+            # memory: 600Mi
 
         env:
         # Run Activator with GC collection when newly generated memory is 500%.
